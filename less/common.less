@@ -1,0 +1,57 @@
+// The painted layer, shared by cards, the editor and the admin preview.
+//
+// .Backdrop-layer          clipped box behind the card's content
+//   ::before               blurred fill, only when zoomed out (< 1×)
+//   ::after                the image: background-position is the focal point,
+//                          transform: scale() the zoom, around that point
+//   .Backdrop-shade        readability shade, above the image
+//
+// The layer is its own stacking context (isolation), so its children order
+// among themselves without the CARD becoming one: on phones core lifts the
+// user-controls dropdown above the fixed navigation bar, and a stacking
+// context on the card would trap it underneath.
+
+.Backdrop-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+  isolation: isolate;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-position: var(--backdrop-x, 50%) var(--backdrop-y, 50%);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  &::after {
+    background-image: var(--backdrop-image);
+    transform: scale(var(--backdrop-zoom, 1));
+    transform-origin: var(--backdrop-x, 50%) var(--backdrop-y, 50%);
+  }
+}
+
+.Backdrop--out .Backdrop-layer::before {
+  background-image: var(--backdrop-image);
+  filter: blur(16px) brightness(0.85);
+  transform: scale(1.12);
+}
+
+.Backdrop-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.Backdrop--gradient .Backdrop-shade {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.28) 55%, rgba(0, 0, 0, 0.62) 100%);
+}
+
+.Backdrop--darken .Backdrop-shade {
+  background: rgba(0, 0, 0, 0.45);
+}

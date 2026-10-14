@@ -1,0 +1,8 @@
+# Kept out of the package Composer downloads: none of it runs on a forum.
+/.github export-ignore
+/tests export-ignore
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/.styleci.yml export-ignore
+/phpstan.neon export-ignore
+/CLAUDE.md export-ignore
