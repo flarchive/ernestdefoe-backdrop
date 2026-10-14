@@ -1,0 +1,76 @@
+@import 'common';
+@import 'editor';
+
+.BackdropDefault {
+  .Button {
+    width: auto;
+  }
+}
+
+.BackdropDefault-preview {
+  position: relative;
+  align-self: stretch;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 600px;
+  height: 140px;
+  margin-bottom: 10px;
+  border-radius: var(--border-radius);
+  background: var(--control-bg);
+}
+
+.BackdropAdminGallery {
+  .Button {
+    width: auto;
+  }
+}
+
+.BackdropAdminGallery-empty {
+  color: var(--muted-color);
+}
+
+.BackdropAdminGallery-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+  align-self: stretch;
+  max-width: 720px;
+  margin: 0 0 10px;
+  padding: 0;
+  list-style: none;
+}
+
+.BackdropAdminGallery-item {
+  position: relative;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  background: var(--control-bg);
+  cursor: grab;
+
+  &--ghost {
+    opacity: 0.4;
+  }
+}
+
+.BackdropAdminGallery-thumb {
+  aspect-ratio: 16 / 7;
+  background-size: cover;
+}
+
+.BackdropAdminGallery-actions {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  display: flex;
+  gap: 2px;
+
+  .Button {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+
+    &:hover,
+    &:focus-visible {
+      background: rgba(0, 0, 0, 0.75);
+    }
+  }
+}
